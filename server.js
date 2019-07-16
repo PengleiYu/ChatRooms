@@ -50,3 +50,17 @@ function serveStatic(response, cache, absPath) {
         })
     }
 }
+
+var server = http.createServer(function (request, response) {
+    var filePath
+    if (request.url == '/') {
+        filePath = 'public/index.html'
+    } else {
+        filePath = 'public' + request.url
+    }
+    var absPath = './' + filePath
+    serveStatic(response, cache, absPath)
+})
+server.listen(3000, function () {
+    console.log("Server listening on port 3000.")
+})
